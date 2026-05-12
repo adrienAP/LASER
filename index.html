@@ -235,6 +235,61 @@ footer{border-top:1px solid var(--border);background:var(--surface)}
   .steps{grid-template-columns:1fr 1fr}
   .steps::before{display:none}
 }
+
+/* ── MULTI-ITEM CARDS ───────────────────────────────────── */
+.item-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);display:grid;grid-template-columns:150px 1fr;overflow:hidden;margin-bottom:12px;transition:border-color .2s}
+.item-card:hover{border-color:var(--gold-dk)}
+.item-canvas-col{background:var(--surface);border-right:1px solid var(--border);padding:12px;display:flex;flex-direction:column;gap:8px}
+.item-canvas{width:100%;height:110px;display:block;border-radius:var(--r);background:var(--bg)}
+.item-stat{display:flex;flex-direction:column;gap:1px}
+.item-stat-lbl{font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.7px;font-weight:600}
+.item-stat-val{font-size:12px;font-weight:600;color:var(--text)}
+.item-config-col{padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.item-header{display:flex;justify-content:space-between;align-items:flex-start}
+.item-name{font-size:13px;font-weight:600;color:#fff;word-break:break-all}
+.item-remove{background:none;border:none;color:var(--text-dim);cursor:pointer;padding:3px;border-radius:var(--r);transition:all .2s;flex-shrink:0;margin-left:8px}
+.item-remove:hover{background:rgba(224,72,72,.12);color:var(--err)}
+.item-row{display:flex;gap:16px;align-items:flex-end}
+.item-field{display:flex;flex-direction:column;gap:5px}
+.item-field-lbl{font-size:9px;font-weight:600;color:var(--text-md);text-transform:uppercase;letter-spacing:.7px}
+.mini-seg{display:flex;gap:3px;background:var(--surface);border-radius:var(--r);padding:3px}
+.mini-seg-btn{flex:1;padding:5px 4px;background:transparent;border:none;border-radius:4px;color:var(--text-md);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font-b);text-align:center;white-space:nowrap}
+.mini-seg-btn.active{background:var(--card2);color:#fff;border:1px solid var(--border)}
+.mini-thick{display:flex;flex-wrap:wrap;gap:4px}
+.mini-t-btn{padding:5px 7px;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--text-md);font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:var(--font-b);line-height:1}
+.mini-t-btn.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
+.mini-t-btn.manual{border-style:dashed}
+.mini-qty{display:flex;align-items:center;gap:5px}
+.mini-qty-btn{width:26px;height:26px;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;font-family:var(--font-b)}
+.mini-qty-btn:hover{border-color:var(--gold-dk);color:var(--gold)}
+.mini-qty-inp{width:50px;background:var(--surface);border:1px solid var(--border);border-radius:4px;color:#fff;font-size:14px;font-weight:700;font-family:var(--font-d);text-align:center;padding:3px;outline:none;height:26px}
+.mini-qty-inp:focus{border-color:var(--gold)}
+.item-price-block{margin-left:auto;text-align:right;flex-shrink:0}
+.item-price{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--gold);line-height:1}
+.item-price-unit{font-size:11px;color:var(--text-md);margin-top:2px}
+.item-disc{font-size:11px;color:var(--ok);font-weight:600}
+.item-warn-pill{background:rgba(232,160,32,.10);border:1px solid rgba(232,160,32,.3);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:600;color:var(--warn);margin-top:4px;display:inline-block}
+.add-more{border:2px dashed var(--border);border-radius:var(--r-lg);padding:14px;text-align:center;cursor:pointer;transition:all .2s;color:var(--text-md);font-size:13px;font-weight:500;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.add-more:hover{border-color:var(--gold-dk);color:var(--gold)}
+/* ── ORDER SUMMARY ──────────────────────────────────────── */
+.order-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-top:8px}
+.order-head{background:var(--card2);padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.order-head h3{font-family:var(--font-d);font-size:18px;font-weight:700;color:#fff;letter-spacing:.3px}
+.order-deliv{display:flex;gap:6px}
+.order-deliv-btn{padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--text-md);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-b);transition:all .2s}
+.order-deliv-btn.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
+.order-lines{padding:0 24px}
+.order-line{display:grid;grid-template-columns:1fr 100px 60px 90px;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(28,48,96,.4);font-size:13px}
+.order-line:last-child{border:none}
+.ol-name{font-weight:600;color:#fff;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ol-mat{color:var(--text-md);font-size:12px}
+.ol-qty{color:var(--text-md);text-align:center;font-size:12px}
+.ol-price{font-weight:700;color:#fff;text-align:right;font-family:var(--font-d);font-size:15px}
+.order-line-warn{grid-column:1/-1;padding:0 0 4px;margin-top:-4px}
+.order-footer{padding:16px 24px;border-top:2px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.order-total-block{}
+.order-grand{font-family:var(--font-d);font-size:40px;font-weight:800;color:var(--gold);line-height:1}
+.order-grand-lbl{font-size:12px;color:var(--text-md);margin-top:4px}
 </style>
 </head>
 <body>
@@ -324,138 +379,61 @@ footer{border-top:1px solid var(--border);background:var(--surface)}
     <div class="upload-icon">
       <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
     </div>
-    <h3>Déposez votre fichier ici</h3>
-    <p>Glissez-déposez votre plan ou cliquez pour parcourir</p>
+    <h3>Déposez vos fichiers ici</h3>
+    <p>Plusieurs fichiers acceptés — matériau, épaisseur et quantité individuels par pièce</p>
     <div class="upload-formats">
       <span class="format-badge">DXF</span>
       <span class="format-badge">STEP / STP</span>
-      <span class="format-badge">R12 — R2018</span>
+      <span class="format-badge">Sélection multiple</span>
     </div>
-    <input type="file" id="file-input" accept=".dxf,.step,.stp">
+    <input type="file" id="file-input" accept=".dxf,.step,.stp" multiple>
   </div>
 
   <!-- Loader -->
   <div class="loader" id="loader">
     <div class="loader-ring"></div>
-    <p>Analyse du fichier en cours…</p>
+    <p id="loader-msg">Analyse en cours…</p>
   </div>
 
-  <!-- Config panel (revealed after upload) -->
-  <div id="config-panel">
-    <div class="config-grid">
+  <!-- Items list -->
+  <div id="items-list" style="margin-top:16px"></div>
 
-      <!-- LEFT: file preview + info -->
-      <div class="panel">
-        <div class="panel-title">Aperçu de la pièce</div>
-        <canvas id="preview-canvas"></canvas>
-        <div class="file-info" id="file-info">
-          <div class="info-item"><span class="info-lbl">Fichier</span><span class="info-val" id="fi-name">—</span></div>
-          <div class="info-item"><span class="info-lbl">Gabarit</span><span class="info-val" id="fi-bbox">—</span></div>
-          <div class="info-item"><span class="info-lbl">Longueur de coupe</span><span class="info-val" id="fi-len">—</span></div>
-          <div class="info-item"><span class="info-lbl">Perçages détectés</span><span class="info-val" id="fi-piercings">—</span></div>
-        </div>
-        <div style="margin-top:12px">
-          <button class="btn btn-outline" style="width:100%;font-size:12px" onclick="document.getElementById('file-input').click()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-            Changer de fichier
-          </button>
-        </div>
-      </div>
+  <!-- Add more -->
+  <div class="add-more" id="add-more" style="display:none" onclick="document.getElementById('file-input').click()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Ajouter d'autres fichiers DXF
+  </div>
 
-      <!-- RIGHT: configuration -->
-      <div class="panel">
-        <div class="panel-title">Paramètres de commande</div>
-
-        <!-- Material -->
-        <div class="form-group">
-          <label class="form-label">Matériau</label>
-          <div class="seg-control">
-            <button class="seg-btn active" onclick="selectMaterial('S235JR',this)">Acier S235JR</button>
-            <button class="seg-btn" onclick="selectMaterial('COR-TEN',this)">COR-TEN®</button>
-            <button class="seg-btn" onclick="selectMaterial('Inox 304',this)">Inox 304</button>
-          </div>
-        </div>
-
-        <!-- Thickness -->
-        <div class="form-group">
-          <label class="form-label">Épaisseur</label>
-          <div class="thick-grid" id="thick-grid"></div>
-        </div>
-
-        <!-- Quantity -->
-        <div class="form-group">
-          <label class="form-label">Quantité</label>
-          <div class="qty-wrap">
-            <button class="qty-btn" onclick="changeQty(-1)">−</button>
-            <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="999" onchange="updateQuote()">
-            <button class="qty-btn" onclick="changeQty(1)">+</button>
-          </div>
-          <div class="qty-discount" id="qty-discount"></div>
-        </div>
-
-        <!-- Delivery -->
-        <div class="form-group">
-          <label class="form-label">Délai de livraison</label>
-          <div class="deliver-grid">
-            <button class="deliver-btn active" onclick="selectDelivery('3w',this)">
-              3 semaines<span>×1.08</span>
-            </button>
-            <button class="deliver-btn" onclick="selectDelivery('1w',this)">
-              1 semaine<span>×1.20</span>
-            </button>
-            <button class="deliver-btn" onclick="selectDelivery('48h',this)">
-              Express 48h<span>×1.50</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Unit note -->
-        <div style="background:var(--surface);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--text-dim);line-height:1.5">
-          <strong style="color:var(--text-md)">Unités DXF :</strong> le fichier est interprété en millimètres. Si votre DXF est en pouces, multipliez le prix matière par 25,4².
+  <!-- Order summary -->
+  <div id="order-summary" style="display:none">
+    <div class="order-wrap">
+      <div class="order-head">
+        <h3>Récapitulatif de commande</h3>
+        <div class="order-deliv">
+          <button class="order-deliv-btn active" id="od-3w" onclick="setDelivery('3w')">3 semaines</button>
+          <button class="order-deliv-btn" id="od-1w" onclick="setDelivery('1w')">1 semaine</button>
+          <button class="order-deliv-btn" id="od-48h" onclick="setDelivery('48h')">Express 48h</button>
         </div>
       </div>
-    </div>
-
-    <!-- Quote result -->
-    <div id="quote-panel">
-      <div class="quote-card">
-        <div class="quote-header">
-          <h3>Devis estimatif — AP Laser</h3>
-          <div class="quote-total-block">
-            <div class="quote-total" id="q-total">— €</div>
-            <div class="quote-per-piece" id="q-per-piece">HT · pièce unitaire — €</div>
-          </div>
+      <div class="order-lines" id="order-lines"></div>
+      <div class="order-footer">
+        <div class="order-total-block">
+          <div class="order-grand" id="order-grand">— €</div>
+          <div class="order-grand-lbl">Total HT — toutes lignes</div>
         </div>
-        <div class="quote-body">
-          <div class="breakdown-row"><span class="lbl">Matière chargée</span><span class="val" id="q-mat">—</span></div>
-          <div class="breakdown-row sub-row"><span class="lbl">Poids estimé (bbox)</span><span class="val" id="q-weight">—</span></div>
-          <div class="breakdown-row"><span class="lbl">Découpe laser</span><span class="val" id="q-cut">—</span></div>
-          <div class="breakdown-row sub-row"><span class="lbl">Temps de coupe estimé</span><span class="val" id="q-cuttime">—</span></div>
-          <div class="breakdown-row"><span class="lbl">Perçages</span><span class="val" id="q-pierce">—</span></div>
-          <div class="breakdown-row" id="q-disc-row" style="display:none">
-            <span class="lbl">Remise quantité <span class="discount-pill" id="q-disc-pct"></span></span>
-            <span class="val" id="q-disc">—</span>
-          </div>
-          <div class="breakdown-row total-row">
-            <span class="lbl">Total HT <span id="q-qty-note" style="font-weight:400;color:var(--text-md)"></span></span>
-            <span class="val" id="q-total-2">—</span>
-          </div>
-        </div>
-
-        <!-- Warnings -->
-        <div class="warnings" id="warnings-area" style="padding:0 24px"></div>
-
-        <!-- Actions -->
-        <div class="quote-actions">
-          <button class="btn btn-gold" style="flex:1" onclick="requestQuote()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="requestQuoteMulti()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Demander un devis formel
           </button>
-          <button class="btn btn-outline" onclick="printQuote()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <button class="btn btn-outline" onclick="window.print()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
             Imprimer
           </button>
         </div>
+      </div>
+      <div style="padding:0 24px 16px;font-size:11px;color:var(--text-dim)">
+        Unités DXF interprétées en millimètres. Prix HT. Minimum de commande par ligne appliqué.
       </div>
     </div>
   </div>
@@ -858,172 +836,296 @@ function calcPrice(geo, material, thickness, qty, delivery) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   UI HELPERS
+   MULTI-ITEM STATE
 ══════════════════════════════════════════════════════════ */
-const fmt = v => v.toLocaleString('fr-BE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const fmt  = v => v.toLocaleString('fr-BE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
 const fmtN = v => v.toLocaleString('fr-BE',{minimumFractionDigits:1,maximumFractionDigits:1});
 
+let items = [];
+let globalDelivery = '3w';
+let idCtr = 0;
+
 function showToast(msg, type='') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show '+(type||'');
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',3000);
 }
 
-function buildThicknessGrid() {
-  const mat = PRICING[state.material];
-  const grid = document.getElementById('thick-grid');
-  grid.innerHTML = '';
-  state.thickness = null;
-  for (const t of mat.thicknesses) {
+/* ── Item CRUD ─────────────────────────────────────────── */
+function addItem(geo, name, isStep) {
+  const id = ++idCtr;
+  const mat = 'S235JR';
+  const thickness = PRICING[mat].thicknesses[1]; // default 2mm
+  items.push({id, name, geo, isStep, material:mat, thickness, qty:1});
+  renderAll();
+}
+
+function removeItem(id) {
+  items = items.filter(i=>i.id!==id);
+  renderAll();
+}
+
+function setItemMaterial(id, mat) {
+  const item = items.find(i=>i.id===id);
+  if (!item) return;
+  item.material = mat;
+  item.thickness = PRICING[mat].thicknesses[0];
+  rebuildItemCard(item);
+  updateOrderSummary();
+}
+
+function setItemThickness(id, t) {
+  const item = items.find(i=>i.id===id);
+  if (!item) return;
+  item.thickness = t;
+  updateItemPrice(item);
+  updateOrderSummary();
+}
+
+function setItemQty(id, val) {
+  const item = items.find(i=>i.id===id);
+  if (!item) return;
+  item.qty = Math.max(1, Math.min(999, parseInt(val)||1));
+  document.getElementById('qty-'+id).value = item.qty;
+  updateItemPrice(item);
+  updateOrderSummary();
+}
+
+function changeItemQty(id, delta) {
+  const item = items.find(i=>i.id===id);
+  if (!item) return;
+  item.qty = Math.max(1, Math.min(999, item.qty+delta));
+  document.getElementById('qty-'+id).value = item.qty;
+  updateItemPrice(item);
+  updateOrderSummary();
+}
+
+function setDelivery(key) {
+  globalDelivery = key;
+  ['3w','1w','48h'].forEach(k=>{
+    document.getElementById('od-'+k).classList.toggle('active', k===key);
+  });
+  items.forEach(item=>updateItemPrice(item));
+  updateOrderSummary();
+}
+
+/* ── Render ────────────────────────────────────────────── */
+function renderAll() {
+  const list = document.getElementById('items-list');
+  list.innerHTML = '';
+  items.forEach(item => list.appendChild(buildItemCard(item)));
+  document.getElementById('add-more').style.display = items.length ? 'flex' : 'none';
+  document.getElementById('order-summary').style.display = items.length ? 'block' : 'none';
+  updateOrderSummary();
+}
+
+function buildItemCard(item) {
+  const el = document.createElement('div');
+  el.className = 'item-card';
+  el.id = 'card-'+item.id;
+  el.innerHTML = buildItemCardHTML(item);
+  scheduleCanvas(item);
+  return el;
+}
+
+function rebuildItemCard(item) {
+  const el = document.getElementById('card-'+item.id);
+  if (!el) return;
+  el.innerHTML = buildItemCardHTML(item);
+  scheduleCanvas(item);
+}
+
+function buildItemCardHTML(item) {
+  const mat = PRICING[item.material];
+  const price = item.isStep ? null : calcPrice(item.geo, item.material, item.thickness, item.qty, globalDelivery);
+
+  const thickBtns = mat.thicknesses.map(t => {
     const td = mat.data[t];
-    const btn = document.createElement('button');
-    btn.className = 'thick-btn'+(td.auto===false?' manual':'');
-    btn.dataset.t = t;
-    btn.innerHTML = `${t} mm${td.auto===false?'<br><small style="font-size:10px;color:var(--text-dim)">Revue</small>':''}`;
-    btn.onclick = () => {
-      document.querySelectorAll('.thick-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      state.thickness = t;
-      updateQuote();
-    };
-    grid.appendChild(btn);
+    const active = t === item.thickness ? ' active' : '';
+    const manual = td.auto===false ? ' manual' : '';
+    return `<button class="mini-t-btn${active}${manual}" onclick="setItemThickness(${item.id},${t})">${t}<span style="font-size:9px"> mm</span></button>`;
+  }).join('');
+
+  const matBtns = ['S235JR','COR-TEN','Inox 304'].map(m => {
+    const label = m==='COR-TEN'?'COR-TEN®':m;
+    const active = m===item.material?' active':'';
+    return `<button class="mini-seg-btn${active}" onclick="setItemMaterial(${item.id},'${m}')">${label}</button>`;
+  }).join('');
+
+  const priceHTML = item.isStep
+    ? `<div class="item-price" style="font-size:13px;color:var(--warn)">Revue manuelle</div><div class="item-price-unit">Fichier STEP — nous contacter</div>`
+    : price
+      ? `<div class="item-price">${fmt(price.final)}</div>
+         <div class="item-price-unit">Unitaire : ${fmt(price.perPiece)}</div>
+         ${price.discPct>0?`<div class="item-disc">Remise −${price.discPct}%</div>`:''}
+         ${price.warns.length>0?`<div class="item-warn-pill">⚠ Revue manuelle</div>`:''}`
+      : `<div class="item-price">— €</div>`;
+
+  const shortName = item.name.length>32 ? item.name.slice(0,29)+'…' : item.name;
+  const bboxStr = item.isStep||!item.geo.w ? 'N/D' : `${Math.round(item.geo.w)}×${Math.round(item.geo.h)} mm`;
+  const lenStr  = item.isStep||!item.geo.len ? 'N/D' : `${(item.geo.len/1000).toFixed(2)} m`;
+  const prcStr  = item.isStep ? 'N/D' : String(item.geo.piercings);
+
+  return `
+    <div class="item-canvas-col">
+      <canvas class="item-canvas" id="cv-${item.id}"></canvas>
+      <div class="item-stat"><span class="item-stat-lbl">Gabarit</span><span class="item-stat-val">${bboxStr}</span></div>
+      <div class="item-stat"><span class="item-stat-lbl">Coupe</span><span class="item-stat-val">${lenStr}</span></div>
+      <div class="item-stat"><span class="item-stat-lbl">Perçages</span><span class="item-stat-val">${prcStr}</span></div>
+    </div>
+    <div class="item-config-col">
+      <div class="item-header">
+        <div class="item-name">${shortName}</div>
+        <button class="item-remove" onclick="removeItem(${item.id})" title="Supprimer cette ligne">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="item-field">
+        <span class="item-field-lbl">Matériau</span>
+        <div class="mini-seg">${matBtns}</div>
+      </div>
+      <div class="item-field">
+        <span class="item-field-lbl">Épaisseur</span>
+        <div class="mini-thick">${thickBtns}</div>
+      </div>
+      <div class="item-row">
+        <div class="item-field">
+          <span class="item-field-lbl">Quantité</span>
+          <div class="mini-qty">
+            <button class="mini-qty-btn" onclick="changeItemQty(${item.id},-1)">−</button>
+            <input type="number" class="mini-qty-inp" id="qty-${item.id}" value="${item.qty}" min="1" max="999" onchange="setItemQty(${item.id},this.value)">
+            <button class="mini-qty-btn" onclick="changeItemQty(${item.id},1)">+</button>
+          </div>
+        </div>
+        <div class="item-price-block" id="price-${item.id}">${priceHTML}</div>
+      </div>
+    </div>`;
+}
+
+function scheduleCanvas(item) {
+  if (item.isStep) return;
+  setTimeout(() => {
+    const cv = document.getElementById('cv-'+item.id);
+    if (cv) drawItemPreview(cv, item.geo);
+  }, 60);
+}
+
+function drawItemPreview(canvas, geo) {
+  const dpr = window.devicePixelRatio||1;
+  const cw = canvas.clientWidth||140, ch = canvas.clientHeight||110;
+  canvas.width  = cw*dpr; canvas.height = ch*dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle='#060E20'; ctx.fillRect(0,0,cw,ch);
+  ctx.strokeStyle='rgba(26,48,96,.4)'; ctx.lineWidth=.5;
+  for(let x=0;x<cw;x+=16){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,ch);ctx.stroke();}
+  for(let y=0;y<ch;y+=16){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(cw,y);ctx.stroke();}
+  if(!geo||geo.w===0||geo.h===0) return;
+  const pad=10, scX=(cw-2*pad)/geo.w, scY=(ch-2*pad)/geo.h, sc=Math.min(scX,scY);
+  const tx=x=>pad+(cw-2*pad-geo.w*sc)/2+(x-geo.minX)*sc;
+  const ty=y=>ch-pad-(ch-2*pad-geo.h*sc)/2-(y-geo.minY)*sc;
+  ctx.strokeStyle='#C8A86A'; ctx.lineWidth=1; ctx.lineCap='round'; ctx.lineJoin='round';
+  for(const e of geo.entities){
+    ctx.beginPath();
+    switch(e.type){
+      case 'LINE': ctx.moveTo(tx(e.cx||0),ty(e.cy||0)); ctx.lineTo(tx(e.ex||0),ty(e.ey||0)); break;
+      case 'CIRCLE': ctx.arc(tx(e.cx||0),ty(e.cy||0),(e.r||0)*sc,0,2*Math.PI); break;
+      case 'ARC': { const sa=-(e.sa||0)*Math.PI/180, ea=-(e.ea||360)*Math.PI/180; ctx.arc(tx(e.cx||0),ty(e.cy||0),(e.r||0)*sc,sa,ea,true); break; }
+      case 'LWPOLYLINE': case 'POLYLINE': {
+        const v=e.verts||[],closed=((e.flags||0)&1)===1,n=v.length;
+        if(!n)break; ctx.moveTo(tx(v[0].x),ty(v[0].y));
+        for(let i=0;i<n;i++){const v2=v[(i+1)%n];if(i===n-1&&!closed)break;ctx.lineTo(tx(v2.x),ty(v2.y));}
+        if(closed)ctx.closePath(); break;
+      }
+      case 'SPLINE': { const v=e.verts||[]; if(!v.length)break; ctx.moveTo(tx(v[0].x),ty(v[0].y)); for(let i=1;i<v.length;i++)ctx.lineTo(tx(v[i].x),ty(v[i].y)); break; }
+    }
+    ctx.stroke();
   }
-  // auto-select first
-  grid.firstChild.click();
 }
 
-function selectMaterial(mat, btn) {
-  document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  state.material = mat;
-  buildThicknessGrid();
-  updateQuote();
+function updateItemPrice(item) {
+  const el = document.getElementById('price-'+item.id);
+  if (!el) return;
+  if (item.isStep) return;
+  const price = calcPrice(item.geo, item.material, item.thickness, item.qty, globalDelivery);
+  if (!price) return;
+  el.innerHTML = `<div class="item-price">${fmt(price.final)}</div>
+    <div class="item-price-unit">Unitaire : ${fmt(price.perPiece)}</div>
+    ${price.discPct>0?`<div class="item-disc">Remise −${price.discPct}%</div>`:''}
+    ${price.warns.length>0?`<div class="item-warn-pill">⚠ Revue manuelle</div>`:''}`;
 }
 
-function selectDelivery(key, btn) {
-  document.querySelectorAll('.deliver-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  state.delivery = key;
-  updateQuote();
-}
-
-function changeQty(delta) {
-  const inp = document.getElementById('qty-input');
-  const v = Math.max(1, Math.min(999, (parseInt(inp.value)||1)+delta));
-  inp.value = v;
-  state.qty = v;
-  updateQuote();
-}
-
-function updateQuote() {
-  state.qty = Math.max(1, parseInt(document.getElementById('qty-input').value)||1);
-
-  // Discount badge
-  const d = DISCOUNTS.find(d=>state.qty>=d.min&&state.qty<=d.max)||{pct:0};
-  const dEl = document.getElementById('qty-discount');
-  dEl.textContent = d.pct>0?`Remise quantité : −${d.pct} %`:'';
-
-  if (!state.geo || !state.thickness) return;
-  const r = calcPrice(state.geo, state.material, state.thickness, state.qty, state.delivery);
-  if (!r) return;
-
-  document.getElementById('quote-panel').style.display='block';
-
-  document.getElementById('q-total').textContent  = fmt(r.final);
-  document.getElementById('q-total-2').textContent = fmt(r.final);
-  document.getElementById('q-per-piece').textContent = `HT · unitaire : ${fmt(r.perPiece)}`;
-  document.getElementById('q-qty-note').textContent = state.qty>1?`(×${state.qty} pièces)`:'';
-
-  document.getElementById('q-mat').textContent   = fmt(r.matCost*state.qty);
-  document.getElementById('q-weight').textContent = `${fmtN(r.weight_kg)} kg/pièce`;
-  document.getElementById('q-cut').textContent   = fmt(r.cutCost*state.qty);
-  document.getElementById('q-cuttime').textContent = `${fmtN(r.cutMin)} min/pièce`;
-  document.getElementById('q-pierce').textContent = fmt(r.pierceCost*state.qty);
-
-  const dRow = document.getElementById('q-disc-row');
-  if (r.discPct>0) {
-    dRow.style.display='flex';
-    document.getElementById('q-disc-pct').textContent=`−${r.discPct} %`;
-    document.getElementById('q-disc').textContent = '−'+fmt(r.discAmt);
-  } else { dRow.style.display='none'; }
-
-
-
-  // Warnings
-  const wa = document.getElementById('warnings-area');
-  wa.innerHTML='';
-  for (const w of r.warns) {
-    const div=document.createElement('div');
-    div.className='warning-item';
-    div.innerHTML=`<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>${w}`;
-    wa.appendChild(div);
+function updateOrderSummary() {
+  if (!items.length) return;
+  const lines = document.getElementById('order-lines');
+  lines.innerHTML = '';
+  let grand = 0;
+  for (const item of items) {
+    const price = item.isStep ? null : calcPrice(item.geo, item.material, item.thickness, item.qty, globalDelivery);
+    if (price) grand += price.final;
+    const row = document.createElement('div');
+    row.className = 'order-line';
+    const shortN = item.name.length>28?item.name.slice(0,25)+'…':item.name;
+    const ep = item.isStep ? '—' : item.thickness+' mm';
+    const matLabel = item.material==='COR-TEN'?'COR-TEN®':item.material;
+    row.innerHTML = `
+      <div><div class="ol-name">${shortN}</div><div class="ol-mat">${matLabel} · ${ep}</div></div>
+      <div class="ol-qty">×${item.qty}</div>
+      <div></div>
+      <div class="ol-price">${price?fmt(price.final):'Revue'}</div>`;
+    lines.appendChild(row);
+    if (price&&price.warns.length>0) {
+      const wRow = document.createElement('div');
+      wRow.innerHTML = `<div class="order-line-warn"><span class="item-warn-pill" style="font-size:10px">⚠ ${price.warns[0]}</span></div>`;
+      lines.appendChild(wRow);
+    }
   }
-  if (r.warns.length>0) {
-    const banner=document.createElement('div');
-    banner.className='review-banner';
-    banner.innerHTML='<h4>Devis soumis à revue manuelle</h4><p>Ce devis est fourni à titre indicatif. Contactez-nous pour confirmation officielle.</p>';
-    wa.appendChild(banner);
-  }
-  if (wa.children.length>0) wa.style.padding='0 24px 16px';
+  document.getElementById('order-grand').textContent = grand>0?fmt(grand):'— €';
 }
 
 /* ══════════════════════════════════════════════════════════
    FILE HANDLING
 ══════════════════════════════════════════════════════════ */
-function handleFile(file) {
-  if (!file) return;
-  const ext = file.name.split('.').pop().toLowerCase();
+function processFiles(fileList) {
+  const files = Array.from(fileList).filter(f=>f);
+  if (!files.length) return;
+  const loader = document.getElementById('loader');
+  const msg = document.getElementById('loader-msg');
+  loader.style.display='flex';
+  let done=0;
 
-  if (ext==='step'||ext==='stp') {
-    document.getElementById('config-panel').style.display='grid';
-    document.getElementById('config-panel').style.display='block';
-    showToast('Fichier STEP : revue manuelle requise. Contactez-nous.','err');
-    state.geo={len:0,piercings:0,w:0,h:0,minX:0,minY:0,entities:[]};
-    document.getElementById('fi-name').textContent=file.name;
-    document.getElementById('fi-bbox').textContent='N/D';
-    document.getElementById('fi-len').textContent='N/D';
-    document.getElementById('fi-piercings').textContent='N/D';
-    buildThicknessGrid();
-    return;
-  }
+  files.forEach((file, idx) => {
+    const ext = file.name.split('.').pop().toLowerCase();
+    if (ext==='step'||ext==='stp') {
+      msg.textContent=`Chargement ${idx+1}/${files.length} — ${file.name}`;
+      addItem({len:0,piercings:0,w:0,h:0,minX:0,minY:0,entities:[]}, file.name, true);
+      done++;
+      if (done===files.length) { loader.style.display='none'; showToast(`${files.length} fichier(s) chargé(s)`,'ok'); }
+      return;
+    }
+    if (ext!=='dxf') { done++; showToast(`Format non reconnu : ${file.name}`,'err'); return; }
 
-  if (ext!=='dxf') { showToast('Format non reconnu. Utilisez DXF ou STEP.','err'); return; }
-
-  const loader=document.getElementById('loader');
-  const panel=document.getElementById('config-panel');
-  loader.style.display='flex'; panel.style.display='none';
-
-  const reader=new FileReader();
-  reader.onload=e=>{
-    setTimeout(()=>{
-      try {
-        const geo=parseDXF(e.target.result);
-        state.geo=geo;
-        loader.style.display='none';
-        panel.style.display='block';
-
-        // Update canvas and info
-        const canvas=document.getElementById('preview-canvas');
-        canvas.style.height='300px';
-        setTimeout(()=>drawPreview(geo),50);
-
-        const shortName=file.name.length>24?file.name.slice(0,21)+'…':file.name;
-        document.getElementById('fi-name').textContent=shortName;
-        document.getElementById('fi-bbox').textContent=`${Math.round(geo.w)} × ${Math.round(geo.h)} mm`;
-        document.getElementById('fi-len').textContent=`${(geo.len/1000).toFixed(2)} m`;
-        document.getElementById('fi-piercings').textContent=geo.piercings;
-
-        buildThicknessGrid();
-        showToast(`DXF analysé — ${geo.entities.length} entités détectées`,'ok');
-        document.getElementById('configurator').scrollIntoView({behavior:'smooth',block:'start'});
-      } catch(err) {
-        loader.style.display='none';
-        showToast('Erreur de lecture DXF : '+err.message,'err');
-      }
-    },600);
-  };
-  reader.readAsText(file);
+    const reader = new FileReader();
+    reader.onload = e => {
+      msg.textContent=`Analyse ${done+1}/${files.length} — ${file.name}`;
+      setTimeout(() => {
+        try {
+          const geo = parseDXF(e.target.result);
+          addItem(geo, file.name, false);
+        } catch(err) {
+          showToast(`Erreur : ${file.name} — ${err.message}`,'err');
+        }
+        done++;
+        if (done===files.length) {
+          loader.style.display='none';
+          showToast(`${done} fichier(s) analysé(s)`,'ok');
+          document.getElementById('configurator').scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      }, 300);
+    };
+    reader.readAsText(file);
+  });
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1032,25 +1134,22 @@ function handleFile(file) {
 const ua=document.getElementById('upload-area');
 ua.addEventListener('dragover',e=>{e.preventDefault();ua.classList.add('drag');});
 ua.addEventListener('dragleave',()=>ua.classList.remove('drag'));
-ua.addEventListener('drop',e=>{e.preventDefault();ua.classList.remove('drag');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('file-input').addEventListener('change',e=>handleFile(e.target.files[0]));
+ua.addEventListener('drop',e=>{e.preventDefault();ua.classList.remove('drag');processFiles(e.dataTransfer.files);});
+document.getElementById('file-input').addEventListener('change',e=>{processFiles(e.target.files);e.target.value='';});
 
 /* ══════════════════════════════════════════════════════════
    ACTIONS
 ══════════════════════════════════════════════════════════ */
-function requestQuote() {
+function requestQuoteMulti() {
+  const lines = items.map(item => {
+    const price = item.isStep ? null : calcPrice(item.geo, item.material, item.thickness, item.qty, globalDelivery);
+    const mat = item.material==='COR-TEN'?'COR-TEN®':item.material;
+    return `- ${item.name} | ${mat} ${item.isStep?'':item.thickness+' mm'} | Qté ${item.qty} | ${price?fmt(price.final):'Revue manuelle'}`;
+  }).join('\n');
   const subject=encodeURIComponent('Demande de devis — AP Laser');
-  const body=encodeURIComponent(
-    `Bonjour,\n\nJe souhaite recevoir un devis formel pour :\n`+
-    `- Matériau : ${state.material}\n`+
-    `- Épaisseur : ${state.thickness} mm\n`+
-    `- Quantité : ${state.qty} pièce(s)\n`+
-    `- Délai : ${DELIVERY[state.delivery].label}\n\n`+
-    `Cordialement,`
-  );
+  const body=encodeURIComponent(`Bonjour,\n\nJe souhaite recevoir un devis formel pour les lignes suivantes :\n\n${lines}\n\nDélai souhaité : ${DELIVERY[globalDelivery].label}\n\nCordialement,`);
   window.open(`mailto:contact@aplaser.be?subject=${subject}&body=${body}`);
 }
-function printQuote(){window.print();}
 </script>
 </body>
 </html>
