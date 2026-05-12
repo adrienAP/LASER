@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Laser — Découpe laser sur mesure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080F22;
+  --surface:   #0C1632;
+  --card:      #101E40;
+  --card2:     #142450;
+  --border:    #1C3060;
+  --gold:      #C8A86A;
+  --gold-lt:   #DDBF8A;
+  --gold-dk:   #9A7A48;
+  --gold-bg:   rgba(200,168,106,.10);
+  --steel:     #5A7AA0;
+  --steel-lt:  #8AAAC8;
+  --text:      #D4DCE8;
+  --text-md:   #8090A8;
+  --text-dim:  #4A607E;
+  --ok:        #3CB878;
+  --warn:      #E8A020;
+  --err:       #E04848;
+  --font-d:    'Barlow Condensed', sans-serif;
+  --font-b:    'DM Sans', sans-serif;
+  --r:         6px;
+  --r-lg:      12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ─────────────────────────────────────────── */
+header{position:sticky;top:0;z-index:100;background:rgba(8,15,34,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.hdr-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-mark{width:38px;height:38px;background:var(--card2);border:1px solid var(--gold-dk);border-radius:var(--r);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.logo-mark::before{content:'AC';font-family:var(--font-d);font-weight:800;font-size:14px;color:var(--gold);letter-spacing:-1px}
+.logo-text{font-family:var(--font-d);font-weight:700;font-size:22px;letter-spacing:3px;color:var(--text)}
+.logo-text span{color:var(--gold)}
+nav{display:flex;gap:28px}
+nav a{color:var(--text-md);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .2s}
+nav a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--bg)!important;padding:7px 16px;border-radius:var(--r);font-weight:600;font-size:13px}
+.nav-cta:hover{background:var(--gold-lt)!important;color:var(--bg)!important}
+
+/* ── HERO ────────────────────────────────────────────── */
+.hero{max-width:1100px;margin:0 auto;padding:72px 24px 56px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--gold-bg);border:1px solid var(--gold-dk);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-family:var(--font-d);font-weight:800;font-size:58px;line-height:.95;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:var(--text-md);font-size:16px;line-height:1.7;margin-bottom:32px;max-width:420px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.btn-gold{background:var(--gold);color:var(--bg)}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.stat-val{font-family:var(--font-d);font-size:32px;font-weight:700;color:#fff;display:block}
+.stat-lbl{font-size:12px;color:var(--text-md)}
+.hero-visual{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;position:relative;min-height:340px;display:flex;align-items:center;justify-content:center}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:32px 32px;opacity:.4}
+.hero-deco{position:relative;z-index:1;text-align:center}
+.hero-deco-ring{width:160px;height:160px;border:2px solid var(--gold-dk);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;animation:spin 20s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-deco-inner{width:100px;height:100px;border:1px dashed var(--gold-dk);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hero-deco svg{width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.hero-deco p{font-size:12px;color:var(--text-md);margin-top:12px;letter-spacing:1px;text-transform:uppercase}
+
+/* ── FEATURE BADGES ─────────────────────────────────── */
+.features{max-width:1100px;margin:0 auto;padding:0 24px 64px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;transition:border-color .2s}
+.feat:hover{border-color:var(--gold-dk)}
+.feat-icon{width:36px;height:36px;background:var(--gold-bg);border-radius:var(--r);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.feat-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.8}
+.feat h3{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.feat p{font-size:12px;color:var(--text-md);line-height:1.5}
+
+/* ── SECTION TITLE ──────────────────────────────────── */
+.section-title{max-width:1100px;margin:0 auto;padding:0 24px 32px;display:flex;align-items:center;gap:16px}
+.section-title h2{font-family:var(--font-d);font-size:38px;font-weight:700;color:#fff;letter-spacing:-.5px}
+.section-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+.section-badge{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--text-md);white-space:nowrap}
+
+/* ── UPLOAD ZONE ─────────────────────────────────────── */
+#configurator{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.upload-area{border:2px dashed var(--border);border-radius:var(--r-lg);padding:60px 40px;text-align:center;cursor:pointer;transition:all .3s;position:relative;background:var(--card)}
+.upload-area:hover,.upload-area.drag{border-color:var(--gold);background:var(--card2)}
+.upload-area.drag{border-style:solid}
+.upload-icon{width:64px;height:64px;margin:0 auto 20px;background:var(--gold-bg);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center}
+.upload-icon svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.upload-area h3{font-family:var(--font-d);font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
+.upload-area p{color:var(--text-md);font-size:14px;margin-bottom:24px}
+.upload-formats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.format-badge{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:4px 12px;font-size:11px;font-weight:600;color:var(--text-md);letter-spacing:.5px}
+input[type=file]{display:none}
+
+/* ── CONFIGURATOR ───────────────────────────────────── */
+#config-panel{display:none;margin-top:24px}
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px}
+.panel-title{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+
+/* preview canvas */
+#preview-canvas{width:100%;height:300px;display:block;border-radius:var(--r);background:var(--surface)}
+.file-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.info-item{background:var(--surface);border-radius:var(--r);padding:10px 12px}
+.info-lbl{font-size:10px;color:var(--text-dim);font-weight:600;text-transform:uppercase;letter-spacing:.8px;display:block}
+.info-val{font-size:15px;font-weight:600;color:#fff;margin-top:2px;display:block;font-family:var(--font-d);letter-spacing:.5px}
+
+/* form controls */
+.form-group{margin-bottom:16px}
+.form-label{font-size:12px;font-weight:600;color:var(--text-md);display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.seg-control{display:flex;gap:4px;background:var(--surface);border-radius:var(--r);padding:4px}
+.seg-btn{flex:1;padding:8px 4px;background:transparent;border:none;border-radius:4px;color:var(--text-md);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-align:center;font-family:var(--font-b)}
+.seg-btn.active{background:var(--card2);color:#fff;border:1px solid var(--border)}
+.seg-btn:hover:not(.active){color:var(--text)}
+
+.thick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.thick-btn{padding:10px 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--text-md);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;font-family:var(--font-b)}
+.thick-btn:hover{border-color:var(--gold-dk);color:var(--text)}
+.thick-btn.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
+.thick-btn.manual{border-style:dashed}
+
+.qty-wrap{display:flex;align-items:center;gap:12px}
+.qty-btn{width:36px;height:36px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.qty-btn:hover{border-color:var(--gold-dk);color:var(--gold)}
+.qty-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:#fff;font-size:18px;font-weight:600;font-family:var(--font-d);text-align:center;padding:8px;outline:none}
+.qty-input:focus{border-color:var(--gold)}
+.qty-discount{font-size:12px;color:var(--ok);font-weight:600;margin-top:4px;min-height:18px}
+
+.deliver-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.deliver-btn{padding:10px 6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);color:var(--text-md);font-size:12px;font-weight:500;cursor:pointer;text-align:center;transition:all .2s;font-family:var(--font-b)}
+.deliver-btn:hover{border-color:var(--gold-dk)}
+.deliver-btn.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
+.deliver-btn span{display:block;font-size:11px;margin-top:2px;color:var(--text-dim)}
+.deliver-btn.active span{color:var(--gold-dk)}
+
+/* ── QUOTE PANEL ─────────────────────────────────────── */
+#quote-panel{display:none;margin-top:20px}
+.quote-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.quote-header{background:var(--card2);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.quote-header h3{font-family:var(--font-d);font-size:20px;font-weight:700;color:#fff;letter-spacing:.5px}
+.quote-total-block{text-align:right}
+.quote-total{font-family:var(--font-d);font-size:38px;font-weight:800;color:var(--gold);line-height:1}
+.quote-per-piece{font-size:12px;color:var(--text-md);margin-top:4px}
+.quote-body{padding:20px 24px}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(28,48,96,.5);font-size:13px}
+.breakdown-row:last-child{border:none}
+.breakdown-row .lbl{color:var(--text-md)}
+.breakdown-row .val{font-weight:600;color:#fff;font-family:var(--font-d);font-size:15px}
+.breakdown-row.sub-row .lbl{color:var(--text-dim);font-size:12px;padding-left:12px}
+.breakdown-row.sub-row .val{color:var(--text-md);font-size:13px}
+.breakdown-row.total-row{border-top:2px solid var(--border);padding-top:12px;margin-top:4px}
+.breakdown-row.total-row .lbl{font-weight:600;color:var(--text)}
+.breakdown-row.total-row .val{color:var(--gold);font-size:20px}
+.discount-pill{background:rgba(60,184,120,.12);border:1px solid rgba(60,184,120,.3);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:var(--ok)}
+.delivery-pill{background:var(--gold-bg);border:1px solid var(--gold-dk);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:600;color:var(--gold)}
+
+/* warnings */
+.warnings{margin-top:16px}
+.warning-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.25);border-radius:var(--r);margin-bottom:8px;font-size:13px;color:var(--warn)}
+.warning-item svg{width:16px;height:16px;flex-shrink:0;stroke:var(--warn);fill:none;stroke-width:2;margin-top:1px}
+.review-banner{padding:16px 20px;background:rgba(232,160,32,.10);border:1px solid rgba(232,160,32,.35);border-radius:var(--r);text-align:center;margin-top:16px}
+.review-banner h4{font-weight:600;color:var(--warn);font-size:14px;margin-bottom:4px}
+.review-banner p{font-size:12px;color:var(--text-md)}
+.quote-actions{padding:20px 24px;border-top:1px solid var(--border);display:flex;gap:12px}
+
+/* ── MATERIALS TABLE ─────────────────────────────────── */
+#materiaux{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.mat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.mat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.mat-head{padding:16px 20px;background:var(--card2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.mat-dot{width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.mat-head h3{font-family:var(--font-d);font-size:20px;font-weight:700;color:#fff}
+.mat-head small{color:var(--text-md);font-size:12px;margin-left:auto}
+.mat-table{width:100%;border-collapse:collapse;font-size:13px}
+.mat-table th{background:var(--surface);color:var(--text-dim);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;padding:8px 14px;text-align:right;border-bottom:1px solid var(--border)}
+.mat-table th:first-child{text-align:left}
+.mat-table td{padding:9px 14px;border-bottom:1px solid rgba(28,48,96,.4);color:var(--text);text-align:right}
+.mat-table td:first-child{text-align:left;font-weight:600;color:#fff}
+.mat-table tr:last-child td{border:none}
+.mat-table tr:hover td{background:rgba(20,36,80,.4)}
+.tag-auto{background:rgba(60,184,120,.12);color:var(--ok);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:600;white-space:nowrap}
+.tag-manual{background:rgba(232,160,32,.10);color:var(--warn);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:600;white-space:nowrap}
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer{border-top:1px solid var(--border);background:var(--surface)}
+.footer-inner{max-width:1100px;margin:0 auto;padding:40px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .logo-text{font-family:var(--font-d);font-size:20px;font-weight:700;letter-spacing:2px;color:var(--text)}
+.footer-brand .logo-text span{color:var(--gold)}
+.footer-brand p{color:var(--text-md);font-size:13px;line-height:1.6;margin-top:12px;max-width:240px}
+.footer-col h4{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-col a{display:block;color:var(--text-md);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{max-width:1100px;margin:0 auto;padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-dim)}
+.iso-badges{display:flex;gap:8px}
+.iso-badge{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:600;color:var(--text-md);letter-spacing:.5px}
+
+/* ── TOAST ───────────────────────────────────────────── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--card2);border:1px solid var(--border);border-radius:var(--r-lg);padding:12px 20px;font-size:13px;color:var(--text);z-index:200;transform:translateY(80px);opacity:0;transition:all .3s;max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.err{border-color:rgba(224,72,72,.4);background:rgba(224,72,72,.08)}
+.toast.ok{border-color:rgba(60,184,120,.4);background:rgba(60,184,120,.08)}
+
+/* ── LOADING ─────────────────────────────────────────── */
+.loader{display:none;flex-direction:column;align-items:center;gap:12px;padding:40px}
+.loader-ring{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+.loader p{font-size:13px;color:var(--text-md)}
+
+/* ── PROCESS STEPS ───────────────────────────────────── */
+#processus{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:28px;left:10%;width:80%;height:1px;background:linear-gradient(to right,transparent,var(--gold-dk),transparent)}
+.step{text-align:center;padding:20px 12px}
+.step-num{width:56px;height:56px;margin:0 auto 14px;background:var(--card2);border:1px solid var(--gold-dk);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:20px;font-weight:700;color:var(--gold)}
+.step h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.step p{font-size:12px;color:var(--text-md);line-height:1.5}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:32px}
+  .hero-visual{min-height:200px}
+  .features{grid-template-columns:1fr 1fr}
+  .config-grid{grid-template-columns:1fr}
+  .mat-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  h1{font-size:40px}
+  .steps{grid-template-columns:1fr 1fr}
+  .steps::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════════ -->
+<header>
+  <div class="hdr-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">AP <span>LASER</span></div>
+    </a>
+    <nav>
+      <a href="#configurator">Devis en ligne</a>
+      <a href="#processus">Matériaux</a>
+      <a href="#processus">Processus</a>
+      <a href="mailto:contact@aplaser.be" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════════ -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">Découpe fibre 3 kW — Format 3015</div>
+    <h1>Découpe<br><em>laser</em><br>sur mesure</h1>
+    <p>Acier S235JR &amp; COR-TEN®. Devis instantané en ligne par import DXF. Qualité industrielle, délai maîtrisé.</p>
+    <div class="hero-btns">
+      <a href="#configurator" class="btn btn-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        Importer mon DXF
+      </a>
+      <a href="#processus" class="btn btn-outline">Comment ça marche</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-val">3 kW</span><span class="stat-lbl">Puissance fibre</span></div>
+      <div><span class="stat-val">3015</span><span class="stat-lbl">Format plateau (mm)</span></div>
+      <div><span class="stat-val">48h</span><span class="stat-lbl">Délai express</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-grid"></div>
+    <div class="hero-deco">
+      <div class="hero-deco-ring">
+        <div class="hero-deco-inner">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="4 2"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+        </div>
+      </div>
+      <p>Découpe laser fibre</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═════════════════════════════════════════ -->
+<div class="features">
+  <div class="feat">
+    <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+    <h3>Devis instantané</h3>
+    <p>Importez votre DXF, obtenez un prix en quelques secondes.</p>
+  </div>
+  <div class="feat">
+    <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <h3>Acier &amp; Corten</h3>
+    <p>S235JR de 2 à 10 mm, COR-TEN® de 1 à 3 mm.</p>
+  </div>
+  <div class="feat">
+    <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <h3>Délai maîtrisé</h3>
+    <p>Standard 3 semaines, urgence 48h disponible.</p>
+  </div>
+  <div class="feat">
+    <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+    <h3>Qualité contrôlée</h3>
+    <p>Emballage et QA inclus. Traçabilité matière.</p>
+  </div>
+</div>
+
+<!-- ═══ CONFIGURATOR ══════════════════════════════════════ -->
+<div class="section-title">
+  <h2>Configurateur de devis</h2>
+  <div class="section-line"></div>
+  <div class="section-badge">Devis en ligne</div>
+</div>
+
+<div id="configurator">
+
+  <!-- Upload zone -->
+  <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+    <div class="upload-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+    </div>
+    <h3>Déposez votre fichier ici</h3>
+    <p>Glissez-déposez votre plan ou cliquez pour parcourir</p>
+    <div class="upload-formats">
+      <span class="format-badge">DXF</span>
+      <span class="format-badge">STEP / STP</span>
+      <span class="format-badge">R12 — R2018</span>
+    </div>
+    <input type="file" id="file-input" accept=".dxf,.step,.stp">
+  </div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <p>Analyse du fichier en cours…</p>
+  </div>
+
+  <!-- Config panel (revealed after upload) -->
+  <div id="config-panel">
+    <div class="config-grid">
+
+      <!-- LEFT: file preview + info -->
+      <div class="panel">
+        <div class="panel-title">Aperçu de la pièce</div>
+        <canvas id="preview-canvas"></canvas>
+        <div class="file-info" id="file-info">
+          <div class="info-item"><span class="info-lbl">Fichier</span><span class="info-val" id="fi-name">—</span></div>
+          <div class="info-item"><span class="info-lbl">Gabarit</span><span class="info-val" id="fi-bbox">—</span></div>
+          <div class="info-item"><span class="info-lbl">Longueur de coupe</span><span class="info-val" id="fi-len">—</span></div>
+          <div class="info-item"><span class="info-lbl">Perçages détectés</span><span class="info-val" id="fi-piercings">—</span></div>
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn btn-outline" style="width:100%;font-size:12px" onclick="document.getElementById('file-input').click()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            Changer de fichier
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: configuration -->
+      <div class="panel">
+        <div class="panel-title">Paramètres de commande</div>
+
+        <!-- Material -->
+        <div class="form-group">
+          <label class="form-label">Matériau</label>
+          <div class="seg-control">
+            <button class="seg-btn active" onclick="selectMaterial('S235JR',this)">Acier S235JR</button>
+            <button class="seg-btn" onclick="selectMaterial('COR-TEN',this)">COR-TEN®</button>
+          </div>
+        </div>
+
+        <!-- Thickness -->
+        <div class="form-group">
+          <label class="form-label">Épaisseur</label>
+          <div class="thick-grid" id="thick-grid"></div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+          <label class="form-label">Quantité</label>
+          <div class="qty-wrap">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="999" onchange="updateQuote()">
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <div class="qty-discount" id="qty-discount"></div>
+        </div>
+
+        <!-- Delivery -->
+        <div class="form-group">
+          <label class="form-label">Délai de livraison</label>
+          <div class="deliver-grid">
+            <button class="deliver-btn active" onclick="selectDelivery('3w',this)">
+              3 semaines<span>×1.08</span>
+            </button>
+            <button class="deliver-btn" onclick="selectDelivery('1w',this)">
+              1 semaine<span>×1.20</span>
+            </button>
+            <button class="deliver-btn" onclick="selectDelivery('48h',this)">
+              Express 48h<span>×1.50</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Unit note -->
+        <div style="background:var(--surface);border-radius:var(--r);padding:10px 12px;font-size:11px;color:var(--text-dim);line-height:1.5">
+          <strong style="color:var(--text-md)">Unités DXF :</strong> le fichier est interprété en millimètres. Si votre DXF est en pouces, multipliez le prix matière par 25,4².
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote result -->
+    <div id="quote-panel">
+      <div class="quote-card">
+        <div class="quote-header">
+          <h3>Devis estimatif — AP Laser</h3>
+          <div class="quote-total-block">
+            <div class="quote-total" id="q-total">— €</div>
+            <div class="quote-per-piece" id="q-per-piece">HT · pièce unitaire — €</div>
+          </div>
+        </div>
+        <div class="quote-body">
+          <div class="breakdown-row"><span class="lbl">Matière chargée</span><span class="val" id="q-mat">—</span></div>
+          <div class="breakdown-row sub-row"><span class="lbl">Poids estimé (bbox)</span><span class="val" id="q-weight">—</span></div>
+          <div class="breakdown-row"><span class="lbl">Découpe laser</span><span class="val" id="q-cut">—</span></div>
+          <div class="breakdown-row sub-row"><span class="lbl">Temps de coupe estimé</span><span class="val" id="q-cuttime">—</span></div>
+          <div class="breakdown-row"><span class="lbl">Perçages</span><span class="val" id="q-pierce">—</span></div>
+          <div class="breakdown-row"><span class="lbl">Setup + programmation + manutention</span><span class="val">50,00 €</span></div>
+          <div class="breakdown-row"><span class="lbl">Emballage + QA standard</span><span class="val">8,00 €</span></div>
+          <div class="breakdown-row" id="q-disc-row" style="display:none">
+            <span class="lbl">Remise quantité <span class="discount-pill" id="q-disc-pct"></span></span>
+            <span class="val" id="q-disc">—</span>
+          </div>
+          <div class="breakdown-row" id="q-deliv-row">
+            <span class="lbl">Multiplicateur délai <span class="delivery-pill" id="q-deliv-lbl"></span></span>
+            <span class="val" id="q-deliv-mult">—</span>
+          </div>
+          <div class="breakdown-row" id="q-margin-row">
+            <span class="lbl">Marge commerciale (22 %)</span>
+            <span class="val" id="q-margin">—</span>
+          </div>
+          <div class="breakdown-row total-row">
+            <span class="lbl">Total HT <span id="q-qty-note" style="font-weight:400;color:var(--text-md)"></span></span>
+            <span class="val" id="q-total-2">—</span>
+          </div>
+        </div>
+
+        <!-- Warnings -->
+        <div class="warnings" id="warnings-area" style="padding:0 24px"></div>
+
+        <!-- Actions -->
+        <div class="quote-actions">
+          <button class="btn btn-gold" style="flex:1" onclick="requestQuote()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Demander un devis formel
+          </button>
+          <button class="btn btn-outline" onclick="printQuote()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Imprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROCESSUS ══════════════════════════════════════════ -->
+<div class="section-title" id="processus">
+  <h2>Comment ça marche</h2>
+  <div class="section-line"></div>
+</div>
+<div id="processus">
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h4>Importez</h4><p>Déposez votre fichier DXF. Le plan est analysé automatiquement.</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Configurez</h4><p>Choisissez matériau, épaisseur, quantité et délai.</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Estimez</h4><p>Prix instantané avec détail complet du calcul.</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Commandez</h4><p>Validez ou contactez-nous pour un devis officiel signé.</p></div>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-text">AP <span>LASER</span></div>
+      <p>Découpe laser fibre sur mesure. Acier, COR-TEN®. Liège, Belgique.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#">Découpe laser</a>
+      <a href="#">Pliage</a>
+      <a href="#">Reverse engineering</a>
+      <a href="#">Mécano-soudé</a>
+    </div>
+    <div class="footer-col">
+      <h4>Matériaux</h4>
+      <a href="#">Acier S235JR</a>
+      <a href="#">COR-TEN®</a>
+      <a href="#">Inox</a>
+      <a href="#">Aluminium</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:contact@aplaser.be">contact@aplaser.be</a>
+      <a href="#">Demander un devis</a>
+      <a href="#">AP-Metal</a>
+      <a href="#">AP-Solutions</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AP Laser / AP-Metal SRL — Tous droits réservés</span>
+    <div class="iso-badges">
+      <span class="iso-badge">EN 10025</span>
+      <span class="iso-badge">ISO 9013</span>
+      <span class="iso-badge">RAL 5026</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   PRICING DATA
+══════════════════════════════════════════════════════════ */
+const PRICING = {
+  'S235JR': {
+    thicknesses: [2,3,4,6,8,10],
+    data: {
+      2:  {charged:1.06, cutRate:1.45, pierceRate:0.04, minOrder:55,  auto:true,  cutSpeed:6000},
+      3:  {charged:0.99, cutRate:1.50, pierceRate:0.05, minOrder:55,  auto:true,  cutSpeed:4000},
+      4:  {charged:1.02, cutRate:1.58, pierceRate:0.06, minOrder:55,  auto:true,  cutSpeed:3000},
+      6:  {charged:1.02, cutRate:1.72, pierceRate:0.07, minOrder:65,  auto:true,  cutSpeed:1800},
+      8:  {charged:1.02, cutRate:1.88, pierceRate:0.09, minOrder:75,  auto:'seuils', cutSpeed:900},
+      10: {charged:1.02, cutRate:2.05, pierceRate:0.12, minOrder:90,  auto:false, cutSpeed:600},
+    },
+    density:7.85, scrapFactor:1.10
+  },
+  'COR-TEN': {
+    thicknesses: [1,2,3],
+    data: {
+      1: {charged:1.52, cutRate:1.50, pierceRate:0.04, minOrder:75, auto:true, cutSpeed:5500},
+      2: {charged:1.46, cutRate:1.56, pierceRate:0.05, minOrder:75, auto:true, cutSpeed:4000},
+      3: {charged:1.34, cutRate:1.64, pierceRate:0.06, minOrder:75, auto:true, cutSpeed:2800},
+    },
+    density:7.85, scrapFactor:1.12
+  }
+};
+
+const DISCOUNTS = [
+  {min:1,  max:4,   pct:0 },
+  {min:5,  max:9,   pct:3 },
+  {min:10, max:24,  pct:6 },
+  {min:25, max:49,  pct:9 },
+  {min:50, max:99,  pct:12},
+  {min:100,max:249, pct:15},
+  {min:250,max:9999,pct:18},
+];
+
+const DELIVERY = {
+  '3w':  {label:'3 semaines', mult:1.08},
+  '1w':  {label:'1 semaine',  mult:1.20},
+  '48h': {label:'Express 48h',mult:1.50},
+};
+
+const SETUP = 50, PACKAGING = 8, MARGIN = 0.22;
+
+/* ══════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════ */
+let state = {
+  geo: null,
+  material: 'S235JR',
+  thickness: null,
+  qty: 1,
+  delivery: '3w'
+};
+
+/* ══════════════════════════════════════════════════════════
+   DXF PARSER
+══════════════════════════════════════════════════════════ */
+function parseDXF(text) {
+  const raw = text.split(/\r?\n/);
+  const pairs = [];
+  for (let i = 0; i + 1 < raw.length; i += 2) {
+    const code = parseInt(raw[i].trim());
+    if (!isNaN(code)) pairs.push([code, raw[i+1].trim()]);
+  }
+
+  let inEntities = false;
+  const entities = [];
+  let cur = null;
+
+  for (const [code, val] of pairs) {
+    if (!inEntities) {
+      if (code === 2 && val === 'ENTITIES') inEntities = true;
+      continue;
+    }
+    if (code === 0) {
+      if (cur) entities.push(cur);
+      if (val === 'ENDSEC' || val === 'EOF') break;
+      cur = {type: val, verts:[], flags:0};
+      continue;
+    }
+    if (!cur) continue;
+
+    if (cur.type === 'LWPOLYLINE') {
+      if (code === 10) cur.verts.push({x:+val, y:0, b:0});
+      else if (code === 20 && cur.verts.length > 0) cur.verts[cur.verts.length-1].y = +val;
+      else if (code === 42 && cur.verts.length > 0) cur.verts[cur.verts.length-1].b = +val;
+      else if (code === 70) cur.flags = parseInt(val);
+    } else if (cur.type === 'POLYLINE') {
+      if (code === 70) cur.flags = parseInt(val);
+    } else if (cur.type === 'VERTEX') {
+      if (code === 10) cur.cx = +val;
+      else if (code === 20) cur.cy = +val;
+    } else if (cur.type === 'SPLINE') {
+      if (code === 10) cur.verts.push({x:+val, y:0});
+      else if (code === 20 && cur.verts.length > 0) cur.verts[cur.verts.length-1].y = +val;
+    } else {
+      if (code === 10) cur.cx = +val;
+      else if (code === 20) cur.cy = +val;
+      else if (code === 11) cur.ex = +val;
+      else if (code === 21) cur.ey = +val;
+      else if (code === 40) cur.r = +val;
+      else if (code === 50) cur.sa = +val;
+      else if (code === 51) cur.ea = +val;
+      else if (code === 70) cur.flags = parseInt(val);
+    }
+  }
+  if (cur) entities.push(cur);
+
+  // Assemble POLYLINE vertices
+  const assembled = [];
+  let poly = null;
+  for (const e of entities) {
+    if (e.type === 'POLYLINE') { poly = {...e, verts:[]}; assembled.push(poly); }
+    else if (e.type === 'VERTEX' && poly) { poly.verts.push({x:e.cx||0, y:e.cy||0, b:0}); }
+    else { poly = null; assembled.push(e); }
+  }
+
+  return analyzeEntities(assembled);
+}
+
+function analyzeEntities(entities) {
+  let len = 0, piercings = 0;
+  const pts = [];
+  const addPt = (x, y) => { if (isFinite(x) && isFinite(y)) pts.push([x,y]); };
+
+  for (const e of entities) {
+    switch(e.type) {
+      case 'LINE': {
+        const dx=(e.ex||0)-(e.cx||0), dy=(e.ey||0)-(e.cy||0);
+        len += Math.hypot(dx,dy);
+        addPt(e.cx||0,e.cy||0); addPt(e.ex||0,e.ey||0);
+        break;
+      }
+      case 'CIRCLE': {
+        const r = e.r||0;
+        len += 2*Math.PI*r; piercings++;
+        addPt((e.cx||0)-r,e.cy||0); addPt((e.cx||0)+r,e.cy||0);
+        addPt(e.cx||0,(e.cy||0)-r); addPt(e.cx||0,(e.cy||0)+r);
+        break;
+      }
+      case 'ARC': {
+        const r=e.r||0; let sa=e.sa||0, ea=e.ea||360;
+        if (ea<=sa) ea+=360;
+        len += r*(ea-sa)*Math.PI/180;
+        addPt((e.cx||0)-r,e.cy||0); addPt((e.cx||0)+r,e.cy||0);
+        addPt(e.cx||0,(e.cy||0)-r); addPt(e.cx||0,(e.cy||0)+r);
+        break;
+      }
+      case 'LWPOLYLINE':
+      case 'POLYLINE': {
+        const verts=e.verts||[];
+        const closed=((e.flags||0)&1)===1;
+        const n=verts.length;
+        for (let i=0;i<n;i++) {
+          const v1=verts[i];
+          addPt(v1.x,v1.y);
+          const v2=verts[(i+1)%n];
+          if (i===n-1 && !closed) break;
+          const dx=v2.x-v1.x, dy=v2.y-v1.y;
+          const chord=Math.hypot(dx,dy);
+          const b=v1.b||0;
+          if (Math.abs(b)<1e-6) { len+=chord; }
+          else {
+            const theta=4*Math.atan(Math.abs(b));
+            const rad=chord/(2*Math.sin(theta/2));
+            len+=rad*theta;
+          }
+        }
+        break;
+      }
+      case 'SPLINE': {
+        const verts=e.verts||[];
+        for (let i=0;i<verts.length-1;i++) {
+          const v1=verts[i], v2=verts[i+1];
+          len+=Math.hypot(v2.x-v1.x,v2.y-v1.y);
+          addPt(v1.x,v1.y);
+        }
+        if (verts.length>0) addPt(verts[verts.length-1].x,verts[verts.length-1].y);
+        break;
+      }
+    }
+  }
+
+  if (!pts.length) return {len:0,piercings:0,w:0,h:0,minX:0,minY:0,entities};
+  const xs=pts.map(p=>p[0]), ys=pts.map(p=>p[1]);
+  const minX=Math.min(...xs), maxX=Math.max(...xs);
+  const minY=Math.min(...ys), maxY=Math.max(...ys);
+  return {len,piercings,w:maxX-minX,h:maxY-minY,minX,minY,entities};
+}
+
+/* ══════════════════════════════════════════════════════════
+   CANVAS PREVIEW
+══════════════════════════════════════════════════════════ */
+function drawPreview(geo) {
+  const canvas = document.getElementById('preview-canvas');
+  const dpr = window.devicePixelRatio||1;
+  const cw = canvas.clientWidth, ch = canvas.clientHeight;
+  canvas.width = cw*dpr; canvas.height = ch*dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr,dpr);
+
+  ctx.fillStyle = '#060E20';
+  ctx.fillRect(0,0,cw,ch);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(26,48,96,.5)';
+  ctx.lineWidth = .5;
+  for (let x=0;x<cw;x+=20){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,ch);ctx.stroke();}
+  for (let y=0;y<ch;y+=20){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(cw,y);ctx.stroke();}
+
+  if (!geo||geo.w===0||geo.h===0) return;
+
+  const pad=24;
+  const scX=(cw-2*pad)/geo.w, scY=(ch-2*pad)/geo.h;
+  const sc=Math.min(scX,scY);
+  const offX=pad+(cw-2*pad-geo.w*sc)/2;
+  const offY=pad+(ch-2*pad-geo.h*sc)/2;
+
+  const tx=x=>offX+(x-geo.minX)*sc;
+  const ty=y=>ch-offY-(y-geo.minY)*sc;
+
+  ctx.strokeStyle = '#C8A86A';
+  ctx.lineWidth = 1.2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  for (const e of geo.entities) {
+    ctx.beginPath();
+    switch(e.type) {
+      case 'LINE':
+        ctx.moveTo(tx(e.cx||0),ty(e.cy||0));
+        ctx.lineTo(tx(e.ex||0),ty(e.ey||0));
+        break;
+      case 'CIRCLE':
+        ctx.arc(tx(e.cx||0),ty(e.cy||0),(e.r||0)*sc,0,2*Math.PI);
+        break;
+      case 'ARC': {
+        const sa_r=-(e.sa||0)*Math.PI/180;
+        const ea_r=-(e.ea||360)*Math.PI/180;
+        ctx.arc(tx(e.cx||0),ty(e.cy||0),(e.r||0)*sc,sa_r,ea_r,true);
+        break;
+      }
+      case 'LWPOLYLINE':
+      case 'POLYLINE': {
+        const verts=e.verts||[];
+        const closed=((e.flags||0)&1)===1;
+        const n=verts.length;
+        if (!n) break;
+        ctx.moveTo(tx(verts[0].x),ty(verts[0].y));
+        for (let i=0;i<n;i++) {
+          const v1=verts[i], v2=verts[(i+1)%n];
+          if (i===n-1&&!closed) break;
+          ctx.lineTo(tx(v2.x),ty(v2.y));
+        }
+        if (closed) ctx.closePath();
+        break;
+      }
+      case 'SPLINE': {
+        const verts=e.verts||[];
+        if (!verts.length) break;
+        ctx.moveTo(tx(verts[0].x),ty(verts[0].y));
+        for (let i=1;i<verts.length;i++) ctx.lineTo(tx(verts[i].x),ty(verts[i].y));
+        break;
+      }
+    }
+    ctx.stroke();
+  }
+
+  // Bounding box
+  ctx.strokeStyle='rgba(200,168,106,.2)';
+  ctx.lineWidth=.8;
+  ctx.setLineDash([4,4]);
+  ctx.strokeRect(offX, offY+(ch-2*pad-geo.h*sc)/2*0, geo.w*sc, ch-2*pad);
+  ctx.setLineDash([]);
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRICING ENGINE
+══════════════════════════════════════════════════════════ */
+function calcPrice(geo, material, thickness, qty, delivery) {
+  const mat = PRICING[material];
+  const td = mat.data[thickness];
+  if (!td) return null;
+
+  // Weight (bbox × thickness, convert mm³ → dm³ → kg)
+  const vol_mm3 = geo.w * geo.h * thickness;
+  const weight_kg = vol_mm3 / 1e6 * mat.density * mat.scrapFactor;
+
+  const matCost   = weight_kg * td.charged;
+  const cutMin    = geo.len / td.cutSpeed;
+  const cutCost   = cutMin * td.cutRate;
+  const pierceCost= geo.piercings * td.pierceRate;
+
+  const basePerPiece = matCost + cutCost + pierceCost;
+  const discountable = basePerPiece * qty;
+  const fixed = SETUP + PACKAGING;
+
+  const d = DISCOUNTS.find(d=>qty>=d.min&&qty<=d.max)||{pct:0};
+  const discAmt = discountable * d.pct/100;
+  const afterDisc = discountable - discAmt + fixed;
+  const withMargin = afterDisc / (1-MARGIN);
+  const delivMult = DELIVERY[delivery].mult;
+  const withDeliv = withMargin * delivMult;
+  const final = Math.max(withDeliv, td.minOrder);
+
+  // Manual review triggers
+  const warns = [];
+  if (geo.w>2950||geo.h>1450) warns.push('Gabarit pièce > 3015 mm → Revue manuelle requise');
+  if (weight_kg>80) warns.push('Poids estimé > 80 kg → Revue manuelle requise');
+  if (geo.len>25000) warns.push('Longueur de coupe > 25 000 mm → Revue manuelle requise');
+  if (geo.piercings>300) warns.push('Nombre de perçages > 300 → Revue manuelle requise');
+  if (qty>250) warns.push('Quantité > 250 pièces → Revue manuelle requise');
+  if (final>2500) warns.push('Montant ligne > 2 500 € HT → Revue manuelle recommandée');
+  if (delivery==='48h'&&qty>20) warns.push('Express 48h + quantité > 20 → Revue manuelle requise');
+  if (delivery==='48h'&&thickness>4) warns.push('Express 48h + épaisseur > 4 mm → Revue manuelle requise');
+  if (!td.auto) warns.push(`${material} ${thickness} mm — Hors plage auto-quote → Revue manuelle systématique`);
+  if (td.auto==='seuils') warns.push(`S235JR 8 mm — Auto-quote avec seuils. Vérification conseillée.`);
+
+  return {weight_kg, matCost, cutMin, cutCost, pierceCost, fixed, discPct:d.pct, discAmt, afterDisc, withMargin, withDeliv, final, perPiece:final/qty, delivMult, warns};
+}
+
+/* ══════════════════════════════════════════════════════════
+   UI HELPERS
+══════════════════════════════════════════════════════════ */
+const fmt = v => v.toLocaleString('fr-BE',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+const fmtN = v => v.toLocaleString('fr-BE',{minimumFractionDigits:1,maximumFractionDigits:1});
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show '+(type||'');
+  setTimeout(()=>t.className='toast',3000);
+}
+
+function buildThicknessGrid() {
+  const mat = PRICING[state.material];
+  const grid = document.getElementById('thick-grid');
+  grid.innerHTML = '';
+  state.thickness = null;
+  for (const t of mat.thicknesses) {
+    const td = mat.data[t];
+    const btn = document.createElement('button');
+    btn.className = 'thick-btn'+(td.auto===false?' manual':'');
+    btn.dataset.t = t;
+    btn.innerHTML = `${t} mm${td.auto===false?'<br><small style="font-size:10px;color:var(--text-dim)">Revue</small>':''}`;
+    btn.onclick = () => {
+      document.querySelectorAll('.thick-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      state.thickness = t;
+      updateQuote();
+    };
+    grid.appendChild(btn);
+  }
+  // auto-select first
+  grid.firstChild.click();
+}
+
+function selectMaterial(mat, btn) {
+  document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.material = mat;
+  buildThicknessGrid();
+  updateQuote();
+}
+
+function selectDelivery(key, btn) {
+  document.querySelectorAll('.deliver-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.delivery = key;
+  updateQuote();
+}
+
+function changeQty(delta) {
+  const inp = document.getElementById('qty-input');
+  const v = Math.max(1, Math.min(999, (parseInt(inp.value)||1)+delta));
+  inp.value = v;
+  state.qty = v;
+  updateQuote();
+}
+
+function updateQuote() {
+  state.qty = Math.max(1, parseInt(document.getElementById('qty-input').value)||1);
+
+  // Discount badge
+  const d = DISCOUNTS.find(d=>state.qty>=d.min&&state.qty<=d.max)||{pct:0};
+  const dEl = document.getElementById('qty-discount');
+  dEl.textContent = d.pct>0?`Remise quantité : −${d.pct} %`:'';
+
+  if (!state.geo || !state.thickness) return;
+  const r = calcPrice(state.geo, state.material, state.thickness, state.qty, state.delivery);
+  if (!r) return;
+
+  document.getElementById('quote-panel').style.display='block';
+
+  document.getElementById('q-total').textContent  = fmt(r.final);
+  document.getElementById('q-total-2').textContent = fmt(r.final);
+  document.getElementById('q-per-piece').textContent = `HT · unitaire : ${fmt(r.perPiece)}`;
+  document.getElementById('q-qty-note').textContent = state.qty>1?`(×${state.qty} pièces)`:'';
+
+  document.getElementById('q-mat').textContent   = fmt(r.matCost*state.qty);
+  document.getElementById('q-weight').textContent = `${fmtN(r.weight_kg)} kg/pièce`;
+  document.getElementById('q-cut').textContent   = fmt(r.cutCost*state.qty);
+  document.getElementById('q-cuttime').textContent = `${fmtN(r.cutMin)} min/pièce`;
+  document.getElementById('q-pierce').textContent = fmt(r.pierceCost*state.qty);
+
+  const dRow = document.getElementById('q-disc-row');
+  if (r.discPct>0) {
+    dRow.style.display='flex';
+    document.getElementById('q-disc-pct').textContent=`−${r.discPct} %`;
+    document.getElementById('q-disc').textContent = '−'+fmt(r.discAmt);
+  } else { dRow.style.display='none'; }
+
+  document.getElementById('q-deliv-lbl').textContent = DELIVERY[state.delivery].label;
+  document.getElementById('q-deliv-mult').textContent = `×${r.delivMult.toFixed(2)}`;
+  document.getElementById('q-margin').textContent = fmt(r.withDeliv-r.withMargin);
+
+  // Warnings
+  const wa = document.getElementById('warnings-area');
+  wa.innerHTML='';
+  for (const w of r.warns) {
+    const div=document.createElement('div');
+    div.className='warning-item';
+    div.innerHTML=`<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>${w}`;
+    wa.appendChild(div);
+  }
+  if (r.warns.length>0) {
+    const banner=document.createElement('div');
+    banner.className='review-banner';
+    banner.innerHTML='<h4>Devis soumis à revue manuelle</h4><p>Ce devis est fourni à titre indicatif. Contactez-nous pour confirmation officielle.</p>';
+    wa.appendChild(banner);
+  }
+  if (wa.children.length>0) wa.style.padding='0 24px 16px';
+}
+
+/* ══════════════════════════════════════════════════════════
+   FILE HANDLING
+══════════════════════════════════════════════════════════ */
+function handleFile(file) {
+  if (!file) return;
+  const ext = file.name.split('.').pop().toLowerCase();
+
+  if (ext==='step'||ext==='stp') {
+    document.getElementById('config-panel').style.display='grid';
+    document.getElementById('config-panel').style.display='block';
+    showToast('Fichier STEP : revue manuelle requise. Contactez-nous.','err');
+    state.geo={len:0,piercings:0,w:0,h:0,minX:0,minY:0,entities:[]};
+    document.getElementById('fi-name').textContent=file.name;
+    document.getElementById('fi-bbox').textContent='N/D';
+    document.getElementById('fi-len').textContent='N/D';
+    document.getElementById('fi-piercings').textContent='N/D';
+    buildThicknessGrid();
+    return;
+  }
+
+  if (ext!=='dxf') { showToast('Format non reconnu. Utilisez DXF ou STEP.','err'); return; }
+
+  const loader=document.getElementById('loader');
+  const panel=document.getElementById('config-panel');
+  loader.style.display='flex'; panel.style.display='none';
+
+  const reader=new FileReader();
+  reader.onload=e=>{
+    setTimeout(()=>{
+      try {
+        const geo=parseDXF(e.target.result);
+        state.geo=geo;
+        loader.style.display='none';
+        panel.style.display='block';
+
+        // Update canvas and info
+        const canvas=document.getElementById('preview-canvas');
+        canvas.style.height='300px';
+        setTimeout(()=>drawPreview(geo),50);
+
+        const shortName=file.name.length>24?file.name.slice(0,21)+'…':file.name;
+        document.getElementById('fi-name').textContent=shortName;
+        document.getElementById('fi-bbox').textContent=`${Math.round(geo.w)} × ${Math.round(geo.h)} mm`;
+        document.getElementById('fi-len').textContent=`${(geo.len/1000).toFixed(2)} m`;
+        document.getElementById('fi-piercings').textContent=geo.piercings;
+
+        buildThicknessGrid();
+        showToast(`DXF analysé — ${geo.entities.length} entités détectées`,'ok');
+        document.getElementById('configurator').scrollIntoView({behavior:'smooth',block:'start'});
+      } catch(err) {
+        loader.style.display='none';
+        showToast('Erreur de lecture DXF : '+err.message,'err');
+      }
+    },600);
+  };
+  reader.readAsText(file);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DRAG & DROP
+══════════════════════════════════════════════════════════ */
+const ua=document.getElementById('upload-area');
+ua.addEventListener('dragover',e=>{e.preventDefault();ua.classList.add('drag');});
+ua.addEventListener('dragleave',()=>ua.classList.remove('drag'));
+ua.addEventListener('drop',e=>{e.preventDefault();ua.classList.remove('drag');handleFile(e.dataTransfer.files[0]);});
+document.getElementById('file-input').addEventListener('change',e=>handleFile(e.target.files[0]));
+
+/* ══════════════════════════════════════════════════════════
+   ACTIONS
+══════════════════════════════════════════════════════════ */
+function requestQuote() {
+  const subject=encodeURIComponent('Demande de devis — AP Laser');
+  const body=encodeURIComponent(
+    `Bonjour,\n\nJe souhaite recevoir un devis formel pour :\n`+
+    `- Matériau : ${state.material}\n`+
+    `- Épaisseur : ${state.thickness} mm\n`+
+    `- Quantité : ${state.qty} pièce(s)\n`+
+    `- Délai : ${DELIVERY[state.delivery].label}\n\n`+
+    `Cordialement,`
+  );
+  window.open(`mailto:contact@aplaser.be?subject=${subject}&body=${body}`);
+}
+function printQuote(){window.print();}
+</script>
+</body>
+</html>
